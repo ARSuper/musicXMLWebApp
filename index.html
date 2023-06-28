@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NoteNameHelper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #a6a6ed;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        p {
+            margin-top: 20px;
+            line-height: 1.5;
+            color: #fff;
+        }
+
+        form {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            margin-top: 20px;
+            padding: 15px;
+            width: 300px;
+            font-size: 18px;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        .image-placeholder {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MusicXML To Note Names!</h1>
+        <p>This web app allows you to generate a modified MusicXML file with note names underneath each note!</p>
+        <p>Keep in mind that this works best with files that only have one part. An example would be a vocal line.</p>
+        <p>You can open the new file in any notation software you use!</p>
+        <form method="POST" enctype="multipart/form-data" action="/">
+            <label for="file">Choose your MusicXML file:</label>
+            <input type="file" name="file" id="file" accept=".xml, .mxl, .midi">
+            <input type="submit" value="Generate Modified XML">
+        </form>
+
+        {% if output_filename %}
+        <p>Click below to download the revised file:</p>
+        <a href="{{ url_for('download_file', filename=output_filename) }}" download>Download</a>
+        {% endif %}
+
+        <img src="https://i.ibb.co/zXtwDzg/XML-Demo.png" alt="XML Image" class="image-placeholder">
+    </div>
+</body>
+</html>
